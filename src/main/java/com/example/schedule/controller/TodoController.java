@@ -40,10 +40,9 @@ public class TodoController {
     @PutMapping("/{id}")
     public ResponseEntity<TodoResponseDto> updateTodo(
             @PathVariable Long id,
-            @RequestBody TodoRequestDto todoRequestDto,
-            @RequestParam String password) {
+            @RequestBody TodoRequestDto dto) {
 
-        TodoResponseDto response = todoService.updateTodo(id, todoRequestDto, password);
+        TodoResponseDto response = todoService.updateTodo(id, dto, dto.getPassword());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

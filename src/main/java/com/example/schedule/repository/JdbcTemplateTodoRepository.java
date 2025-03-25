@@ -71,8 +71,8 @@ public class JdbcTemplateTodoRepository implements TodoRepository {
 
         Todo invalidPassword = findTodoByIdAndPassword(todoId, password).orElseThrow(() -> new RuntimeException("Invalid password"));
 
-        return jdbcTemplate.update("UPDATE todo SET name = ?, todo = ?, update_at = CURRENT_TIMESTAMP WHERE todo_id = ?",
-                name, todo, todoId);
+        return jdbcTemplate.update("UPDATE todo SET name = ?, todo = ?, update_at = CURRENT_TIMESTAMP WHERE todo_id = ? AND password = ?",
+                name, todo, todoId, password);
     }
 
     @Override

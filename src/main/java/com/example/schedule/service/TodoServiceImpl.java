@@ -56,7 +56,9 @@ public class TodoServiceImpl implements TodoService {
 
         todo.update(dto.getTodo(), dto.getName());
 
-        return todoRepository.createTodo(todo);
+        todoRepository.updateTodo(id, todo.getName(), todo.getTodo(), password);
+
+        return new TodoResponseDto(todo);
     }
 
     @Override
