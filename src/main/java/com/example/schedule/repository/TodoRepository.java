@@ -16,7 +16,7 @@ public interface TodoRepository {
 
     Optional<Todo> findTodoByIdAndPassword(Long todoId, String password);
 
-    int updateTodo(Long todoId, String name, String todo);
+    int updateTodo(Long todoId, String name, String todo, String password);
 
-    int deleteTodo(Long todoId);
+    int deleteTodo(Long todoId, String password);
 }

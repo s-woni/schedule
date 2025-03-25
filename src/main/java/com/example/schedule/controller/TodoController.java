@@ -38,14 +38,18 @@ public class TodoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TodoResponseDto> updateTodo(@PathVariable Long id, @RequestBody TodoRequestDto todoRequestDto) {
-        TodoResponseDto response = todoService.updateTodo(id, todoRequestDto);
+    public ResponseEntity<TodoResponseDto> updateTodo(
+            @PathVariable Long id,
+            @RequestBody TodoRequestDto todoRequestDto,
+            @RequestParam String password) {
+
+        TodoResponseDto response = todoService.updateTodo(id, todoRequestDto, password);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTodo(@PathVariable Long id) {
-        todoService.deleteTodo(id);
+    public ResponseEntity<Void> deleteTodo(@PathVariable Long id, @RequestBody TodoRequestDto dto) {
+        todoService.deleteTodo(id, dto.getPassword());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

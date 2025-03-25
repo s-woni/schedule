@@ -13,7 +13,7 @@ public interface TodoService {
 
     TodoResponseDto getTodoById(Long todoId);
 
-    TodoResponseDto updateTodo(Long todoId, TodoRequestDto dto);
+    TodoResponseDto updateTodo(Long todoId, TodoRequestDto dto, String password);
 
-    void deleteTodo(Long todoId);
+    void deleteTodo(Long todoId, String password);
 }

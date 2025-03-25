@@ -67,13 +67,19 @@ public class JdbcTemplateTodoRepository implements TodoRepository {
     }
 
     @Override
-    public int updateTodo(Long todoId, String name, String todo) {
+    public int updateTodo(Long todoId, String name, String todo, String password) {
+
+        Todo invalidPassword = findTodoByIdAndPassword(todoId, password).orElseThrow(() -> new RuntimeException("Invalid password"));
+
         return jdbcTemplate.update("UPDATE todo SET name = ?, todo = ?, update_at = CURRENT_TIMESTAMP WHERE todo_id = ?",
                 name, todo, todoId);
     }
 
     @Override
-    public int deleteTodo(Long todoId) {
+    public int deleteTodo(Long todoId, String password) {
+
+        Todo invalidPassword = findTodoByIdAndPassword(todoId, password).orElseThrow(() -> new RuntimeException("Invalid password"));
+
         return jdbcTemplate.update("DELETE FROM todo WHERE todo_id = ?", todoId);
     }
 

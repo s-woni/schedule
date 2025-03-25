@@ -32,7 +32,7 @@ public class TodoServiceImpl implements TodoService {
     public List<TodoResponseDto> getAllTodos() {
 
         List<TodoResponseDto> todos = todoRepository.findAllTodos();
-        return todos; // 반환형을 List<TodoResponseDto>로 그대로 두기
+        return todos;
     }
 
     @Override
@@ -45,10 +45,14 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public TodoResponseDto updateTodo(Long id, TodoRequestDto dto) {
+    public TodoResponseDto updateTodo(Long id, TodoRequestDto dto, String password) {
 
         Todo todo = todoRepository.findTodoById(id)
                 .orElseThrow(() -> new RuntimeException("Todo not found with id " + id));
+
+        if (!todo.getPassword().equals(password)) {
+            throw new RuntimeException("Invalid password");
+        }
 
         todo.update(dto.getTodo(), dto.getName());
 
@@ -56,11 +60,15 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public void deleteTodo(Long id) {
+    public void deleteTodo(Long id, String password) {
 
         Todo todo = todoRepository.findTodoById(id)
                 .orElseThrow(() -> new RuntimeException("Todo not found with id " + id));
 
-        todoRepository.deleteTodo(id);
+        if (!todo.getPassword().equals(password)) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        todoRepository.deleteTodo(id, password);
     }
 }
