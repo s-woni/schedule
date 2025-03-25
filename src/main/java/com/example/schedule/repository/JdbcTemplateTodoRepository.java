@@ -55,15 +55,15 @@ public class JdbcTemplateTodoRepository implements TodoRepository {
 
     @Override
     public Optional<Todo> findTodoById(Long todoId) {
-        List<Todo> todos = jdbcTemplate.query("SELECT * FROM todo WHERE todo_id = ?", new TodoRowMapper(), todoId);
-        return todos.stream().findFirst();
+        List<Todo> result = jdbcTemplate.query("SELECT * FROM todo WHERE todo_id = ?", new TodoRowMapper(), todoId);
+        return result.stream().findFirst();
     }
 
     @Override
     public Optional<Todo> findTodoByIdAndPassword(Long todoId, String password) {
-        List<Todo> todos = jdbcTemplate.query("SELECT * FROM todo WHERE todo_id = ? AND password = ?",
+        List<Todo> result = jdbcTemplate.query("SELECT * FROM todo WHERE todo_id = ? AND password = ?",
                 new TodoRowMapper(), todoId, password);
-        return todos.stream().findFirst();
+        return result.stream().findFirst();
     }
 
     @Override
