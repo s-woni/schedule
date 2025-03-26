@@ -51,7 +51,7 @@ public class JdbcTemplateTodoRepository implements TodoRepository {
     // 할 일 전체 조회
     @Override
     public List<TodoResponseDto> findAllTodos() {
-        return jdbcTemplate.query("SELECT * FROM todo", new TodoRowMapper())
+        return jdbcTemplate.query("SELECT * FROM todo ORDER BY update_at DESC", new TodoRowMapper())
                 .stream()
                 .map(TodoResponseDto::new)
                 .collect(Collectors.toList());
