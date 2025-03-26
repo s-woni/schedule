@@ -17,6 +17,7 @@ public class TodoServiceImpl implements TodoService {
         this.todoRepository = todoRepository;
     }
 
+    // 할 일 생성
     @Override
     public TodoResponseDto createTodo(TodoRequestDto dto) {
         Todo todo = new Todo(
@@ -28,6 +29,7 @@ public class TodoServiceImpl implements TodoService {
         return todoRepository.createTodo(todo);
     }
 
+    // 할일 전체 조회
     @Override
     public List<TodoResponseDto> getAllTodos() {
 
@@ -35,21 +37,26 @@ public class TodoServiceImpl implements TodoService {
         return todos;
     }
 
+    // 할 일 단일 조회
     @Override
     public TodoResponseDto getTodoById(Long id) {
 
+        // 할 일을 찾을 수 없으면 예외 발생
         Todo todo = todoRepository.findTodoById(id)
                 .orElseThrow(() -> new RuntimeException("Todo not found with id " + id));
 
         return new TodoResponseDto(todo);
     }
 
+    // 할 일 수정
     @Override
     public TodoResponseDto updateTodo(Long id, TodoRequestDto dto, String password) {
 
+        // 할 일을 찾을 수 없으면 예외 발생
         Todo todo = todoRepository.findTodoById(id)
                 .orElseThrow(() -> new RuntimeException("Todo not found with id " + id));
 
+        // 비밀번호와 일치하지 않을 시 예외 발생
         if (!todo.getPassword().equals(password)) {
             throw new RuntimeException("Invalid password");
         }
@@ -61,12 +68,15 @@ public class TodoServiceImpl implements TodoService {
         return new TodoResponseDto(todo);
     }
 
+    // 할 일 삭제
     @Override
     public void deleteTodo(Long id, String password) {
-
+        
+        // 할 일을 찾을 수 없으면 예외 발생
         Todo todo = todoRepository.findTodoById(id)
                 .orElseThrow(() -> new RuntimeException("Todo not found with id " + id));
 
+        // 비밀번호와 일치하지 않을 시 예외 발생
         if (!todo.getPassword().equals(password)) {
             throw new RuntimeException("Invalid password");
         }

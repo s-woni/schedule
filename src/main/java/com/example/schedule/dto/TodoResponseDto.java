@@ -6,12 +6,12 @@ import lombok.Getter;
 @Getter
 public class TodoResponseDto {
 
-    private Long todoId;
-    private String name;
-    private String todo;
-    private String password;
-    private String createAt;
-    private String updateAt;
+    private Long todoId; // ID
+    private String name; // 이름
+    private String todo; // 할일
+    private String password; // 비밀번호
+    private String createAt; // 생성 시간
+    private String updateAt; // 수정 시간
 
     public TodoResponseDto(Todo todo) {
         this.todoId = todo.getTodoId();

@@ -9,12 +9,12 @@ import java.time.LocalDateTime;
 @Setter
 public class Todo {
 
-    private Long todoId;
-    private String name;
-    private String todo;
-    private String password;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
+    private Long todoId; // ID
+    private String name; // 작성자 이름
+    private String todo; // 할일
+    private String password; // 비밀번호
+    private LocalDateTime createAt; // 생성 시간
+    private LocalDateTime updateAt; // 수정 시간
 
     public Todo(String name, String todo, String password) {
         this.name = name;
